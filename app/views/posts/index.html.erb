@@ -21,7 +21,7 @@
         </td>
         <% if post.user_id == current_user.id %>
           <td>
-            <%= button_to 'Edit post', edit_post_path(post) %>
+            <%= button_to 'Edit post', edit_post_path(post), method: :get %>
           </td>
           <td>
             <%= button_to 'Destroy', destroy_path(post), method: :delete %>
