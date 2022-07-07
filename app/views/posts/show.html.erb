@@ -21,7 +21,7 @@
           <%= comment.body %>
         </td>
         <td>
-          <% params = {:post_id => comment.post_id, :id => comment.id}%>
+          <% params = { :post_id => comment.post_id, :id => comment.id } %>
           <%= button_to 'Destroy', post_comment_path(params), method: :delete %>
         </td>
       </table>
