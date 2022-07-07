@@ -1,14 +1,40 @@
 <h1>Current post:</h1>
 <div>
-    <%= @post.id %>
+  <%= @post.id %>
 </div>
 <div>
-    <%= @post.title %>
+  <%= @post.title %>
 </div>
 <div>
-    <%= @post.body %>
+  <%= @post.body %>
 </div>
 <div>
-    <%= @post.created_at %>
+  <%= @post.created_at %>
 </div>
+<br/>
+<h2>Comments</h2>
+<u1>
+  <% @post.comments.each do |comment| %>
+    <li>
+      <table>
+        <td>
+          <%= comment.body %>
+        </td>
+        <td>
+          <% params = {:post_id => comment.post_id, :id => comment.id}%>
+          <%= button_to 'Destroy', post_comment_path(params), method: :delete %>
+        </td>
+      </table>
+    </li>
+  <% end %>
+</u1>
+<%= form_with model: @post.comments.build, url: [@post, @post.comments.build] do |f| %>
+  <div>
+    <%= f.label :body %>
+    <%= f.text_area :body %>
+  </div>
+  <div>
+    <%= f.submit %>
+  </div>
+<% end %>
 <%= link_to 'Back', posts_path %>

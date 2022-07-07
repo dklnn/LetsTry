@@ -4,7 +4,10 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
-  resources :posts
-  root to: 'posts#index', only: %i[index show new create edit update]
-  delete '/posts/destroy/:id', to: 'posts#destroy', as: 'destroy'
+  resources :posts do
+    resources :comments, only: [:new, :create, :destroy]
+  end
+
+  root to: 'posts#index'
+  delete '/posts/destroy/:id', to: 'posts#destroy', as: 'destroy_post'
 end
