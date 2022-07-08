@@ -1,0 +1,78 @@
+<h1>Current post:</h1>
+<div>
+  <table style="border:1px dotted black;">
+    <table>
+      <tr><center><%= User.find(@post.user_id).name %></center></tr>
+      <tr>
+        <% if @post.image.attached? %>
+          <img src= <%= (url_for(@post.image)) %>>
+        <% end %>
+      </tr>
+      <tr>
+        <td>
+          <div>
+            <%= @post.title %>
+          </div>
+          <div>
+            <%= @post.body %>
+          </div>
+        </td>
+        <td>
+          <%= @post.created_at.strftime("%k:%M")  %>
+          <%= @post.created_at.strftime("%d|%m|%Y") %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= button_to 'Show', post_path(@post), method: :get  %>
+        </td>
+        <% if @post.user_id == current_user.id %>
+          <td>
+            <%= button_to 'Edit', edit_post_path(@post), method: :get %>
+          </td>
+          <td>
+            <%= button_to 'Destroy', destroy_post_path(@post), method: :delete %>
+          </td>
+        <% end %>
+      </tr>
+    </table>
+    <%= button_to 'Back', posts_path %>
+    <br/>
+    <br/>
+    <h3>Comments for current post:</h3>
+    <% @post.comments.each do |comment| %>
+      <% params = { :post_id => comment.post_id, :id => comment.id } %>
+      <li>
+        <table style="border:0.5px black;">
+        <table>
+          <tr>
+            <% user = User.find(comment.user_id) %>
+            <%= user.name %>
+          </tr>
+          <tr>
+            <%= comment.body %>
+          </tr>
+          <% if comment.user_id == current_user.id %>
+            <tr>
+              <td>
+                <%= button_to 'Edit', edit_post_comment_path(params), method: :put %>
+              </td>
+              <td>
+                <% params = { :post_id => comment.post_id, :id => comment.id } %>
+                <%= button_to 'Destroy', destroy_post_comment_path(params), method: :delete %>
+              </td>
+            </tr>
+          </table>
+        </li>
+      <% end %>
+    </u1>
+    <%= form_with model: @post.comments.build, url: [@post, @post.comments.build] do |f| %>
+      <div>
+        <%= f.label :body %>
+        <%= f.text_area :body %>
+      </div>
+      <div>
+        <%= f.submit %>
+      </div>
+    <% end %>
+  </div>

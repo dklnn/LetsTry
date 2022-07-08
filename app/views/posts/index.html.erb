@@ -1,38 +1,42 @@
-<h1>All the posts: </h1>
-<%= link_to 'New post', new_post_path%>
-<table>
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Title</th>
-      <th>Body</th>
-      <th>Username</th>
-      <th>Creation date</th>
-      <th>Creation time</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @posts.each do |post| %>
+<h1>All the posts:</h1>
+<%= button_to 'Create new post', posts_path %>
+<% @posts.each do |post| %>
+  <div>
+  <table style="border:1px dotted black;">
+    <table>
+      <tr><center><%= User.find(post.user_id).name %></center></tr>
       <tr>
-        <td><%= post.id         %></td>
-        <td><%= post.title      %></td>
-        <td><%= post.body       %></td>
-        <td><%= User.find(post.user_id).name %></td>
-        <td><%= post.created_at.strftime("%k:%M")  %></td>
-        <td><%= post.created_at.strftime("%d|%m|%Y") %></td>
+        <% if post.image.attached? %>
+          <img src= <%= (url_for(post.image)) %>>
+        <% end %>
+      </tr>
+      <tr>
         <td>
-          <%= button_to 'Show post', post_path(post), method: :get  %>
+          <div>
+            <%= post.title %>
+          </div>
+          <div>
+            <%= post.body %>
+          </div>
+        </td>
+        <td>
+          <%= post.created_at.strftime("%k:%M")  %>
+          <%= post.created_at.strftime("%d|%m|%Y") %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= button_to 'Show', post_path(post), method: :get  %>
         </td>
         <% if post.user_id == current_user.id %>
           <td>
-            <%= button_to 'Edit post', edit_post_path(post), method: :get %>
+            <%= button_to 'Edit', edit_post_path(post), method: :get %>
           </td>
           <td>
             <%= button_to 'Destroy', destroy_post_path(post), method: :delete %>
           </td>
         <% end %>
-      </td>
-    </tr>
-  <% end %>
-</tbody>
-</table>
+      </tr>
+    </table>
+  </div
+<% end %>

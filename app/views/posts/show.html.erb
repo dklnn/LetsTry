@@ -17,6 +17,11 @@
 <div>
   <%= @post.created_at.strftime("%d|%m|%Y") %>
 </div>
+<div>
+  <% if @post.image.attached? %>
+  <img src= <%= (url_for(@post.image)) %>>
+  <% end %>
+</div>
 <br/>
 <h2>Comments</h2>
 <u1>

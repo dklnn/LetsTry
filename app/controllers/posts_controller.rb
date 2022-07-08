@@ -17,6 +17,7 @@ class PostsController < ApplicationController
     if @post.save!
       redirect_to post_path(@post)
     else
+      flash[:errors] = @post.errors.full_messages
       render :new
     end
   end
@@ -44,6 +45,6 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :body)
+    params.require(:post).permit(:title, :body, :image)
   end
 end
