@@ -8,3 +8,5 @@ class Post < ApplicationRecord
   validates :body, length: { in: 3..2000 }
   validates :image, content_type: ['image/png', 'image/jpeg']
 end
+
+
