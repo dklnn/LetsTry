@@ -8,7 +8,24 @@ class CommentsController < ApplicationController
     @comment = @post.comments.new(comments_params)
     @comment.user_id = current_user.id
     @comment.post_id = @post.id
-    redirect_to post_path(@post) if @comment.save
+    @comment.save
+    redirect_to post_path(@post)
+  end
+
+  def edit
+    @post = Post.find(params[:post_id])
+    @comment = @post.comments.find(params[:id])
+  end
+
+  def update
+    @post = Post.find(params[:post_id])
+    @comment = @post.comments.find(params[:id])
+    @comment.update(comments_params)
+    if @comment.update
+      redirect_to post_path(@post)
+    else
+      render :edit
+    end
   end
 
   def destroy

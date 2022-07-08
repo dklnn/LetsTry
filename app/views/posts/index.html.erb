@@ -6,7 +6,9 @@
       <th>ID</th>
       <th>Title</th>
       <th>Body</th>
-      <th>Created at</th>
+      <th>Username</th>
+      <th>Creation date</th>
+      <th>Creation time</th>
     </tr>
   </thead>
   <tbody>
@@ -15,7 +17,9 @@
         <td><%= post.id         %></td>
         <td><%= post.title      %></td>
         <td><%= post.body       %></td>
-        <td><%= post.created_at %></td>
+        <td><%= User.find(post.user_id).name %></td>
+        <td><%= post.created_at.strftime("%k:%M")  %></td>
+        <td><%= post.created_at.strftime("%d|%m|%Y") %></td>
         <td>
           <%= button_to 'Show post', post_path(post), method: :get  %>
         </td>
