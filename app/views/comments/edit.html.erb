@@ -1,9 +1,6 @@
 <h1>Editing comment</h1>
-<% @comment = Comment.find(params[:id]) %>
-<%= form_with url: '/posts/:post_id/comments/:id/edit', method: :get do |f| %>
-<%= @comment.body %>
-<%= f.label :body %><br/>
-<%= f.text_field :body %>
-<%= f.submit %>
+<%= form_with model: @comment, url: post_comment_path(params[:post_id]) do |f| %>
+    <%= f.text_field :body %>
+    <%= f.submit %>
 <% end %>
 <%= link_to "Back", post_path(params[:post_id]) %>

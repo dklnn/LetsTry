@@ -12,9 +12,14 @@ class CommentsController < ApplicationController
     redirect_to post_path(@post)
   end
 
+  def show 
+    @comment = Comment.find(params[:id])
+  end
+
   def edit
-    @post = Post.find(params[:post_id])
-    @comment = @post.comments.find(params[:id])
+    @comment = Comment.find(params[:id])
+
+    render :edit
   end
 
   def update
@@ -24,6 +29,7 @@ class CommentsController < ApplicationController
     if @comment.update(comments_params)
       redirect_to post_path(@post)
     else
+      flash.now[:error] = "Comment update failed"
       render :edit
     end
   end
