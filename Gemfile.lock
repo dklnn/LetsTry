@@ -290,6 +290,7 @@ DEPENDENCIES
   image_processing
   importmap-rails
   jbuilder
+  mini_magick
   pg
   pry-byebug
   pry-rails

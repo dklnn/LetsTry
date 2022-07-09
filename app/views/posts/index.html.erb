@@ -4,7 +4,9 @@
   <div>
   <table style="border:1px dotted black;">
     <table>
-      <tr><center><%= User.find(post.user_id).name %></center></tr>
+      <tr>
+        <%= image_tag User.find(post.user_id).avatar_thumbnail %>
+        <center><%= User.find(post.user_id).name %></center></tr>
       <tr>
         <% if post.image.attached? %>
           <img src= <%= (url_for(post.image)) %>>

@@ -18,6 +18,7 @@ module LetsTry
     #
     # config.time_zone = "Moscow"
     # config.eager_load_paths << Rails.root.join("extras")
+    config.active_storage.variant_processor = :mini_magick
     config.active_record.default_timezone = :local
   end
 end

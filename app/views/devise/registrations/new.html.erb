@@ -6,6 +6,18 @@
   <div class="field">
     <%= f.label :name %><br />
     <%= f.text_field :name, autofocus: true, autocomplete: "username" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :avatar %> <br/>
+    <%= f.file_field :avatar %>
+
+    <% if resource.avatar.attached? %>
+      <% image_tag(resource.avatar) %>
+    <% else %>
+      <% image_tag("default_avatar.jpg") %>
+    <% end %>
+  </div>
 
   <div class="field">
     <%= f.label :email %><br />
