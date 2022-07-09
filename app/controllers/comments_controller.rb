@@ -20,8 +20,8 @@ class CommentsController < ApplicationController
   def update
     @post = Post.find(params[:post_id])
     @comment = @post.comments.find(params[:id])
-    @comment.update(comments_params)
-    if @comment.update
+
+    if @comment.update(comments_params)
       redirect_to post_path(@post)
     else
       render :edit
