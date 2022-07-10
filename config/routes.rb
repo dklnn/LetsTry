@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :posts do
     resources :comments
   end
+  resources :likes, only: %i[new create destroy]
 
   root to: 'posts#index'
   delete '/posts/destroy/:id', to: 'posts#destroy', as: 'destroy_post'

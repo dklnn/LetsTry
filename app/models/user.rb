@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :posts, dependent: :destroy
+  has_many :likes, dependent: :destroy
   has_one_attached :avatar, dependent: :destroy
 
   after_commit :add_default_avatar, on: %i[create update]

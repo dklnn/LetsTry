@@ -22,6 +22,15 @@
       </td>
     </tr>
     <tr>
+      <td>
+        <%= @post.likes.count %> Likes 
+        <% like = current_user.likes.find_by(likeable: @post) %>
+        <% if like.nil? %>
+          <%= button_to 'Like', likes_path, params: { like: { likeable_id: @post.id, likeable_type: Post }, post_id: @post.id }, method: :post %>
+        <% else %>
+          <%= button_to 'Unlike', like_path(like), method: :delete %>
+        <% end %>
+      </td>
       <% if @post.user_id == current_user.id %>
         <td>
           <%= button_to 'Edit', edit_post_path(@post), method: :get %>
@@ -33,7 +42,7 @@
     </tr>
   </table>
 </div>
-<%= button_to 'Back', posts_path %>
+<%= link_to 'Back', posts_path %>
 <br/>
 <br/>
 <h3>Comments for current post:</h3>
@@ -45,16 +54,25 @@
         <b><%= User.find(comment.user_id).name %> - </b>
         <%= comment.body %>
       </tr>
-      <% if comment.user_id == current_user.id %>
-        <tr>
+      <tr>
+        <td>
+          <%= comment.likes.count %> Likes 
+          <% like = current_user.likes.find_by(likeable: comment) %>
+          <% if like.nil? %>
+            <%= button_to 'Like', likes_path, params: { like: { likeable_id: comment.id, likeable_type: Comment }, post_id: @post.id }, method: :post %>
+          <% else %>
+            <%= button_to 'Unlike', like_path(like), method: :delete %>
+          <% end %>
+        </td>
+        <% if comment.user_id == current_user.id %>
           <td>
             <%= button_to 'Edit', edit_post_comment_path(params), method: :get %>
           </td>
           <td>
             <%= button_to 'Destroy', destroy_post_comment_path(params), method: :delete %>
           </td>
-        </tr>
-      <% end %>
+        <% end %>
+      </tr>
     </table>
   </li>
 <% end %>
