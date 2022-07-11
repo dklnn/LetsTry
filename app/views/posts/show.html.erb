@@ -1,46 +1,6 @@
 <h1>Current post:</h1>
 <div>
-  <table style="border:1px dotted black;">
-    <tr><center><%= User.find(@post.user_id).name %></center></tr>
-    <tr>
-      <% if @post.image.attached? %>
-        <img src= <%= (url_for(@post.image)) %>>
-      <% end %>
-    </tr>
-    <tr>
-      <td>
-        <div>
-          <%= @post.title %>
-        </div>
-        <div>
-          <%= @post.body %>
-        </div>
-      </td>
-      <td>
-        <%= @post.created_at.strftime("%k:%M")  %>
-        <%= @post.created_at.strftime("%d|%m|%Y") %>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <%= @post.likes.count %> Likes 
-        <% like = current_user.likes.find_by(likeable: @post) %>
-        <% if like.nil? %>
-          <%= button_to 'Like', likes_path, params: { like: { likeable_id: @post.id, likeable_type: Post }, post_id: @post.id }, method: :post %>
-        <% else %>
-          <%= button_to 'Unlike', like_path(like), method: :delete %>
-        <% end %>
-      </td>
-      <% if @post.user_id == current_user.id %>
-        <td>
-          <%= button_to 'Edit', edit_post_path(@post), method: :get %>
-        </td>
-        <td>
-          <%= button_to 'Destroy', destroy_post_path(@post), method: :delete %>
-        </td>
-      <% end %>
-    </tr>
-  </table>
+  <%= render 'post', post: @post %>
 </div>
 <%= link_to 'Back', posts_path %>
 <br/>

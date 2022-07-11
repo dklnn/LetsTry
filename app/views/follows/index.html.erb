@@ -1,0 +1,7 @@
+<%= link_to 'Back', posts_path %>
+<% @follows.each do |follow| %>
+  <div>
+    <% user = User.find(follow.follower_id) %>
+    <%= link_to user.name, user_path(user), method: :get %>
+  </div>
+<% end %>

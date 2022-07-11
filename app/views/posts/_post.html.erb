@@ -1,0 +1,62 @@
+<% @user = User.find(post.user_id) %>
+<td>
+  <%= image_tag @user.avatar_thumbnail %>
+</td>
+<td>
+  <%= link_to @user.name, user_path(@user), method: :get %>
+</td>
+<tr>
+  <% if current_user.id != @user.id %>
+    <% if current_user.followees.include?(@user) %>
+      <%= button_to 'Unfollow', unfollow_user_path(@user), method: :post %>
+    <% else %>
+      <%= button_to 'Follow', follow_user_path(@user), method: :post %>
+    <% end %>
+  <% end %>
+</tr>
+<table>
+  <tr>
+    <% if post.image.attached? %>
+      <%= image_tag post.image_resized %>
+    <% end %>
+  </tr>
+  <tr>
+    <td>
+      <%= post.likes.count %> Likes 
+      <% like = current_user.likes.find_by(likeable: post) %>
+      <% if like.nil? %>
+        <%= button_to 'Like', likes_path, params: { like: { likeable_id: post.id, likeable_type: Post }, post_id: post.id }, method: :post %>
+      <% else %>
+        <%= button_to 'Unlike', like_path(like), method: :delete %>
+      <% end %>
+    </td>
+    <td>
+      <%= post.comments.count %> Comments
+    </td>
+  </tr>
+  <tr>
+    <div><b>
+        <%= post.title %>
+      </b></div>
+    <div>
+      <%= post.body %>
+    </div>
+  </tr>
+  <tr>
+    <td>
+      <%= button_to 'Show', post_path(post), method: :get  %>
+    </td>
+    <% if post.user_id == current_user.id %>
+      <td>
+        <%= button_to 'Edit', edit_post_path(post), method: :get %>
+      </td>
+      <td>
+        <%= button_to 'Destroy', destroy_post_path(post), method: :delete %>
+      </td>
+    <% end %>
+    <td>
+      <%= post.created_at.strftime("%k:%M")  %>
+      <%= post.created_at.strftime("%d|%m|%Y") %>
+    </td>
+  </tr>
+</table>

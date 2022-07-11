@@ -1,8 +1,10 @@
 <table>
-    <tr>
-        <%= link_to 'Log out', destroy_user_session_path, method: :destroy %>
-    </tr>
-    <tr>
-        <%= link_to 'Edit account', edit_user_registration_path %>
-    </tr>
+  <tr>
+    <td>
+      <%= link_to 'Log out', destroy_user_session_path, method: :destroy %>
+    </td>
+    <td>
+      <%= link_to 'My account', user_path(current_user) %>
+    </td>
+  </tr>
 </table>

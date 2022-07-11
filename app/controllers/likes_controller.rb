@@ -6,14 +6,14 @@ class LikesController < ApplicationController
   def create
     @like = current_user.likes.new(like_params)
 
-    flash[:notice] = @like.errors.full_messages.to_sentence unless @like.save 
+    flash[:notice] = @like.errors.full_messages.to_sentence unless @like.save
 
     redirect_to post_path(params[:post_id])
   end
 
   def destroy
     @like = current_user.likes.find(params[:id])
-    likeable = @like.likeable
+    # likeable = @like.likeable
     @like.destroy
 
     redirect_to post_path(params[:id])

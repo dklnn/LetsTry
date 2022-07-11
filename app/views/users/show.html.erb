@@ -1,0 +1,22 @@
+<% @user = User.find(params[:id]) %>
+<% if @user.id == current_user.id %>
+  <%= render 'profile_settings' %>
+<% end %>
+<%= button_to 'Back', posts_path, method: :get %>
+<h1>
+  <td>
+    <%= image_tag @user.avatar_thumbnail %>
+  </td>
+  <td>
+    <%= @user.name %>'s profile
+  </td>
+</h1>
+<%#do that%>
+<%#= link_to 'Followings', follows_path, method: :get %>
+<%#= link_to 'Followers', follows_path, method: :get %>
+<% @posts = Post.all.where(user_id: @user.id).order(id: :desc) %>
+<% @posts.each do |post| %>
+  <div>
+    <%= render 'posts/post', post: post %>
+  </div>
+<% end %>
