@@ -5,7 +5,7 @@ class Post < ApplicationRecord
 
   has_one_attached :image, dependent: :destroy
   
-  belongs_to :user, optional: true
+  belongs_to :user
 
   validates :title, :body, presence: true
   validates :title, length: { in: 3..125 }
