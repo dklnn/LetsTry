@@ -8,7 +8,7 @@ class PostsController < ApplicationController
   end
 
   def new
-    @post = Post.new
+    @post = current_user.posts.new
   end
 
   def create
@@ -22,13 +22,13 @@ class PostsController < ApplicationController
   end
 
   def edit
-    @post = Post.find(params[:id])
+    @post = current_user.find(params[:id])
   end
 
   def update
     @post = current_user.posts.find(params[:id])
 
-    if @post.update(post_params)
+    if @post.update
       redirect_to post_path(@post)
     else
       render :edit
@@ -37,8 +37,7 @@ class PostsController < ApplicationController
 
   def destroy
     @post = current_user.posts.find(params[:id])
-    @post.destroy
-    redirect_to user_path(current_user)
+    redirect_back fallback_location: user_path(current_user) if @post.destroy
   end
 
   private

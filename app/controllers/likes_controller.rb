@@ -1,6 +1,13 @@
 class LikesController < ApplicationController
+  before_action :set_likeable
+  
   def new
     @like = current_user.likes.new
+  end
+
+  def index
+    params.inspect
+    @likes = Post.find(params[:post_id]).likes
   end
 
   def create
@@ -20,6 +27,12 @@ class LikesController < ApplicationController
   end
 
   private
+
+  def set_likeable
+    if params.include?(:post)
+      @likeable = Post.find(params[:post_id])
+    end
+  end
 
   def like_params
     params.require(:like).permit(:likeable_id, :likeable_type)

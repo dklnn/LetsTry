@@ -2,7 +2,7 @@
 <% if @user.id == current_user.id %>
   <%= render 'profile_settings' %>
 <% end %>
-<%= button_to 'Back', posts_path, method: :get %>
+<%= button_to 'All post\'s', posts_path, method: :get %>
 <h1>
   <td>
     <%= image_tag @user.avatar_thumbnail %>

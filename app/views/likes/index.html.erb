@@ -1,0 +1,8 @@
+<%= link_to 'Back', post_path(@post) %>
+<h4>Likes count: <%= @likes.count %></h4>
+<% @likes.each do |like| %>
+  <div>
+    <% user = User.find(like.user_id) %>
+    <%= link_to user.name, user_path(user), method: :get %>
+  </div>
+<% end %>

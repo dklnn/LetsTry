@@ -1,4 +1,4 @@
-<%= link_to 'Back', posts_path %>
+<%= link_to 'Back', user_path(@user) %>
 <h4>Followers count: <%= @follows.count %></h4>
 <% @follows.each do |follow| %>
   <div>
