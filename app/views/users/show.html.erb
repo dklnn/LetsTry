@@ -11,9 +11,12 @@
     <%= @user.name %>'s profile
   </td>
 </h1>
-<%#do that%>
-<%#= link_to 'Followings', follows_path, method: :get %>
-<%#= link_to 'Followers', follows_path, method: :get %>
+<h4>
+  <table>
+    <%= link_to 'Followings', user_followings_path(@user), method: :get %></br>
+    <%= link_to 'Followers', user_followers_path(@user), method: :get %>
+  </table>
+</h4>
 <% @posts = Post.all.where(user_id: @user.id).order(id: :desc) %>
 <% @posts.each do |post| %>
   <div>

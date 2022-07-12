@@ -6,6 +6,11 @@ Rails.application.routes.draw do
   end
   resources :likes, only: %i[new create destroy]
 
+  get '/users/:id/followings', to: 'follows#followings', as: 'user_followings'
+  get '/users/:id/followers', to: 'follows#followers', as: 'user_followers'
+  post '/users/:id/follow', to: 'follows#create', as: 'follow_user'
+  delete '/users/:id/follow', to: 'follows#destroy', as: 'unfollow_user'
+
   root to: 'posts#index'
 
   delete '/posts/destroy/:id', to: 'posts#destroy', as: 'destroy_post'
@@ -14,6 +19,4 @@ Rails.application.routes.draw do
   patch  '/posts/:post_id/comments/:id', to: 'comments#update', as: 'update_post_comment'
 
   get  'users/:id', to: 'users#show', as: 'user'
-  post '/users/:id/follow', to: 'users#follow', as: 'follow_user'
-  post '/users/:id/unfollow', to: 'users#unfollow', as: 'unfollow_user'
 end

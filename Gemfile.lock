@@ -109,7 +109,10 @@ GEM
       warden (~> 1.2.3)
     diff-lcs (1.5.0)
     digest (3.1.0)
+    down (5.3.1)
+      addressable (~> 2.8)
     erubi (1.10.0)
+    ffaker (2.21.0)
     ffi (1.15.5)
     globalid (1.0.0)
       activesupport (>= 5.0)
@@ -287,6 +290,8 @@ DEPENDENCIES
   database_cleaner
   debug
   devise
+  down
+  ffaker
   image_processing
   importmap-rails
   jbuilder

@@ -11,6 +11,10 @@ gem 'sprockets-rails'
 
 gem 'pg'
 
+gem 'ffaker'
+
+gem 'down'
+
 gem 'image_processing'
 
 # Use the Puma web server [https://github.com/puma/puma]
