@@ -8,7 +8,7 @@ class LikesController < ApplicationController
 
     flash[:notice] = @like.errors.full_messages.to_sentence unless @like.save
 
-    redirect_to post_path(params[:post_id])
+    redirect_back fallback_location: root_path
   end
 
   def destroy
@@ -16,7 +16,7 @@ class LikesController < ApplicationController
     # likeable = @like.likeable
     @like.destroy
 
-    redirect_to post_path(params[:id])
+    redirect_back fallback_location: root_path
   end
 
   private

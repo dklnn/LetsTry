@@ -11,7 +11,8 @@
   <li>
     <table style="border:0px;">
       <tr>
-        <b><%= User.find(comment.user_id).name %> - </b>
+        <% user = User.find(comment.user_id)%>
+        <b><%= link_to user.name, user_path(user), method: :get %> - </b>
         <%= comment.body %>
       </tr>
       <tr>

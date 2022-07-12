@@ -2,7 +2,6 @@
 <h4>Followers count: <%= @follows.count %></h4>
 <% @follows.each do |follow| %>
   <div>
-    <%= follow.id %>
     <% user = User.find(follow.follower_id) %>
     <%= link_to user.name, user_path(user), method: :get %>
   </div>

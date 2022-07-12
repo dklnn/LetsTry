@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :posts do
     resources :comments, except: %i[new show]
   end
-  resources :likes, only: %i[new create delete]
+  resources :likes, only: %i[new create destroy]
 
   get '/users/:id/followings', to: 'follows#followings', as: 'user_followings'
   get '/users/:id/followers', to: 'follows#followers', as: 'user_followers'
