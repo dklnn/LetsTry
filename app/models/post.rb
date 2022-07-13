@@ -11,8 +11,8 @@ class Post < ApplicationRecord
 
   belongs_to :user
 
-  validates :title, :body, presence: true
-  validates :title, length: { in: 3..125 }
+  validates :body, presence: true
+  validates :title, length: { maximum: 125 }
   validates :body, length: { in: 3..2000 }
   validates :image, content_type: ['image/png', 'image/jpeg']
 

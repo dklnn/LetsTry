@@ -15,15 +15,6 @@
     <% if user_signed_in? %>
       <%= render 'shared/navbar' %>
     <% end %>
-
-    <% if notice %>
-      <p class="notice"><%= notice %></p>
-    <% end %>
-
-    <% if alert %>
-      <p class="alert"><%= alert %></p>
-    <% end %>
-
     <%= yield %>
   </body>
 </html>

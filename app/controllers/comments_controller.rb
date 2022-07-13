@@ -1,7 +1,6 @@
 class CommentsController < ApplicationController
   def create
-    @comment = set_post.comments.new(comments_params)
-    @comment.user_id = current_user.id
+    @comment = set_post.comments.create(comments_params.merge(user_id: current_user.id))
     redirect_back fallback_location: root_path if @comment.save!
   end
 

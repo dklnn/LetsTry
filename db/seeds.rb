@@ -28,12 +28,14 @@ end
 User.all.each do |user|
   num_posts = rand(1..3)
   num_posts.times do
-    description = FFaker::Lorem.sentences(rand(1..5))
+    body = FFaker::Lorem.sentences(rand(1..5))
+    title = FFaker::Lorem.sentences(1)
 
     post = Post.new
 
     post.user_id = user.id
-    post.body = description.join
+    post.title = title.join
+    post.body = body.join
     post.created_at = rand(1..60 * 24).minutes.ago
 
     post.image.attach(

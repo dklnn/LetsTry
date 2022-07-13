@@ -7,7 +7,6 @@
 <br/>
 <h3>Comments for current post:</h3>
 <% @post.comments.each do |comment| %>
-  <% params = { :post_id => comment.post_id, :id => comment.id } %>
   <li>
     <table style="border:0px;">
       <tr>
@@ -26,6 +25,7 @@
           <% end %>
         </td>
         <% if comment.user_id == current_user.id %>
+        <% params = { :post_id => comment.post_id, :id => comment.id } %>
           <td>
             <%= button_to 'Edit', edit_post_comment_path(params), method: :get %>
           </td>
