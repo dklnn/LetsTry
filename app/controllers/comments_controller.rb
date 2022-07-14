@@ -1,6 +1,9 @@
 class CommentsController < ApplicationController
+  before_action :set_post, only: %i[create destroy]
+
+  # creates a comment with assigment post and current user
   def create
-    @comment = set_post.comments.create(comments_params.merge(user_id: current_user.id))
+    @comment = @post.comments.create(comments_params.merge(user_id: current_user.id))
     redirect_back fallback_location: root_path if @comment.save!
   end
 
@@ -10,6 +13,8 @@ class CommentsController < ApplicationController
     render :edit
   end
 
+  # searching for current user's comment with received id. 
+  # only user who created the comment can edit & update it
   def update
     @comment = current_user.comments.find(params[:id])
 
@@ -21,8 +26,11 @@ class CommentsController < ApplicationController
     end
   end
 
+  # if-else statement for checking two of approved conditions
+  # 1. User can destroy the comment if user is post creator
+  # 2. User can destroy the comment if user is comment creator
   def destroy
-    @comment = if current_user.id == set_post.user_id
+    @comment = if current_user.id == @post.user_id
                  @post.comments.find(params[:id])
                else
                  current_user.comments.find(params[:id])
@@ -32,10 +40,12 @@ class CommentsController < ApplicationController
 
   private
 
+  # private before action that set's post to which the comment is attached 
   def set_post
     @post = Post.find(params[:post_id])
   end
 
+  # list of permited params for comment creation & updating
   def comments_params
     params.require(:comment).permit(:body)
   end

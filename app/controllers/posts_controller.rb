@@ -1,4 +1,6 @@
 class PostsController < ApplicationController
+  # shows all the posts three per page (pagination setting in model)
+  # in order by descending of updated time
   def index
     @posts = Post.order(updated_at: :desc).page params[:page]
   end
@@ -11,6 +13,7 @@ class PostsController < ApplicationController
     @post = current_user.posts.new
   end
 
+  # creates the post with assigment to current user
   def create
     @post = current_user.posts.new(post_params)
     if @post.save!
@@ -25,6 +28,8 @@ class PostsController < ApplicationController
     @post = current_user.posts.find(params[:id])
   end
 
+  # searching for current user's post with received id. 
+  # only user who created the post can edit, update & destroy it
   def update
     @post = current_user.posts.find(params[:id])
 
