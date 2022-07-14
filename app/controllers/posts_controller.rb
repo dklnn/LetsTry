@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   def index
-    @posts = Post.order(id: :desc).page params[:page]
+    @posts = Post.order(updated_at: :desc).page params[:page]
   end
 
   def show
@@ -22,13 +22,13 @@ class PostsController < ApplicationController
   end
 
   def edit
-    @post = current_user.find(params[:id])
+    @post = current_user.posts.find(params[:id])
   end
 
   def update
     @post = current_user.posts.find(params[:id])
 
-    if @post.update
+    if @post.update(post_params)
       redirect_to post_path(@post)
     else
       render :edit
@@ -37,7 +37,7 @@ class PostsController < ApplicationController
 
   def destroy
     @post = current_user.posts.find(params[:id])
-    redirect_back fallback_location: user_path(current_user) if @post.destroy
+    redirect_to user_path(current_user) if @post.destroy
   end
 
   private

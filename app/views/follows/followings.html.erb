@@ -1,8 +1,0 @@
-<%= link_to 'Back', user_path(@user) %>
-<h4>Followings count: <%= @follows.count %></h4>
-<% @follows.each do |follow| %>
-  <div>
-    <% user = User.find(follow.followee_id) %>
-    <%= link_to user.name, user_path(user), method: :get %>
-  </div>
-<% end %>

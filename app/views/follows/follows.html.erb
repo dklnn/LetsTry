@@ -1,5 +1,5 @@
 <%= link_to 'Back', user_path(@user) %>
-<h4>Followers count: <%= @follows.count %></h4>
+<h4>Follows count: <%= @follows.count %></h4>
 <% @follows.each do |follow| %>
   <div>
     <%= link_to follow.name, user_path(follow.id), method: :get %>

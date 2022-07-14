@@ -12,14 +12,13 @@ class FollowsController < ApplicationController
   end
 
   # wanted to beatifuly hide 'followings' and 'followers' method into 'index', but thats required a lot of time
-  def followings
-    @follows = Follow.where(follower_id: params[:id])
-    @follows = [] if @follows.nil?
+  # so i broke woth this idea
+  def follows
+    @follows = @user.followees
   end
 
   def followers
-    @follows = Follow.where(followee_id: params[:id])
-    @follows = [] if @follows.nil?
+    @follows = @user.followers
   end
 
   private

@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   end
   resources :likes, only: %i[new create destroy]
 
-  get '/users/:id/followings', to: 'follows#followings', as: 'user_followings'
+  get '/users/:id/follows', to: 'follows#follows', as: 'user_follows'
   get '/users/:id/followers', to: 'follows#followers', as: 'user_followers'
   post '/users/:id/follow', to: 'follows#create', as: 'follow_user'
   delete '/users/:id/follow', to: 'follows#destroy', as: 'unfollow_user'

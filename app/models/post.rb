@@ -3,13 +3,13 @@ require 'kaminari'
 class Post < ApplicationRecord
   paginates_per 3
 
+  belongs_to :user
+
   has_many :comments, dependent: :destroy
 
   has_many :likes, as: :likeable, dependent: :destroy
 
   has_one_attached :image, dependent: :destroy
-
-  belongs_to :user
 
   validates :body, presence: true
   validates :title, length: { maximum: 125 }

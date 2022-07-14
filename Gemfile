@@ -11,8 +11,6 @@ gem 'sprockets-rails'
 
 gem 'pg'
 
-gem 'ffaker'
-
 gem 'down'
 
 gem 'image_processing'
@@ -67,9 +65,6 @@ group :development, :test do
   gem 'debug', platforms: %i[mri mingw x64_mingw]
   gem 'pry-byebug'
   gem 'pry-rails'
-  gem 'rspec'
-  gem 'rspec-rails'
-  gem 'shoulda-matchers'
 end
 
 group :development do
@@ -86,6 +81,14 @@ end
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem 'capybara'
+  gem 'factory_bot_rails'
+  gem 'ffaker'
+  gem 'rails-controller-testing'
+  gem 'rspec'
+  gem 'rspec-rails'
   gem 'selenium-webdriver'
+  gem 'shoulda-matchers'
+  gem 'simplecov', require: false, group: :test
+  gem 'simplecov-rcov'
   gem 'webdrivers'
 end
