@@ -1,7 +1,7 @@
 class LikesController < ApplicationController
-  def new
-    @like = current_user.likes.new
-  end
+  # def new
+  #   @like = current_user.likes.new
+  # end
 
   def create
     @like = current_user.likes.new(like_params)
