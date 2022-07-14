@@ -22,7 +22,11 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    @comment = current_user.comments.find(params[:id])
+    @comment = if current_user.id == set_post.user_id
+                 @post.comments.find(params[:id])
+               else
+                 current_user.comments.find(params[:id])
+               end
     redirect_back fallback_location: root_path if @comment.destroy
   end
 

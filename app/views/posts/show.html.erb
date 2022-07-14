@@ -23,11 +23,12 @@
             <%= button_to "#{comment.likes.count} - Unlike", like_path(like), method: :delete %>
           <% end %>
         </td>
-        <% if comment.user_id == current_user.id %>
         <% params = { :post_id => comment.post_id, :id => comment.id } %>
+        <% if comment.user_id == current_user.id %>
           <td>
             <%= button_to 'Edit', edit_post_comment_path(params), method: :get %>
           </td>
+        <% elsif current_user.id == @post.user_id %>
           <td>
             <%= button_to 'Destroy', post_comment_path(params), method: :delete %>
           </td>
