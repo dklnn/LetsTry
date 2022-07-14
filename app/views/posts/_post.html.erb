@@ -1,39 +1,37 @@
 <% @user = User.find(post.user_id) %>
-<td>
-  <%= image_tag @user.avatar_thumbnail %>
-</td>
-<td>
-  <%= link_to @user.name, user_path(@user), method: :get %>
-</td>
-<tr>
+<table>
+  <td>
+    <%= image_tag @user.avatar_thumbnail %>
+  </td>
+  <td><b>
+    <%= link_to @user.name, user_path(@user), method: :get %>
+  </td></b>
   <% if current_user.id != @user.id %>
-    <% if current_user.followees.include?(@user) %>
-      <%= button_to 'Unfollow', unfollow_user_path(@user), method: :delete %>
-    <% else %>
-      <%= button_to 'Follow', follow_user_path(@user), method: :post %>
-    <% end %>
+    <td>
+      <% if current_user.followees.include?(@user) %>
+        <%= button_to 'Unfollow', unfollow_user_path(@user), method: :delete %>
+      <% else %>
+        <%= button_to 'Follow', follow_user_path(@user), method: :post %>
+      <% end %>
+    </td>
+  <% else %>
+    <td>
+      <%= button_to 'Edit', edit_post_path(post), method: :get %>
+    </td>
+    <td>
+      <%= button_to 'Destroy', post_path(post), method: :delete %>
+    </td>
   <% end %>
-</tr>
+  <td>
+    <%= post.created_at.strftime("%k:%M")  %> - 
+    <%= post.created_at.strftime("%d|%m|%Y") %>
+  </td>
+</table>
 <table>
   <tr>
     <% if post.image.attached? %>
       <%= image_tag post.image_resized %>
     <% end %>
-  </tr>
-  <tr>
-    <td>
-      <%= post.likes.count %> Like's
-      <% like = current_user.likes.find_by(likeable: post) %>
-      <% if like.nil? %>
-        <%= button_to 'Like', likes_path, params: { like: { likeable_id: post.id, likeable_type: Post }, post_id: post.id }, method: :post %>
-      <% else %>
-        <%= button_to 'Unlike', like_path(like), method: :delete %>
-      <% end %>
-    </td>
-    <td>
-      <%= post.comments.count %>
-      <%= link_to 'Comments', post_path(post) %>
-    </td>
   </tr>
   <tr>
     <div><b>
@@ -44,17 +42,18 @@
     </div>
   </tr>
   <tr>
-    <% if post.user_id == current_user.id %>
-      <td>
-        <%= button_to 'Edit', edit_post_path(post), method: :get %>
-      </td>
-      <td>
-        <%= button_to 'Destroy', destroy_post_path(post), method: :delete %>
-      </td>
-    <% end %>
     <td>
-      <%= post.created_at.strftime("%k:%M")  %>
-      <%= post.created_at.strftime("%d|%m|%Y") %>
+      <% like = current_user.likes.find_by(likeable: post) %>
+      <% counter = post.likes.count %>
+      <% if like.nil? %>
+        <% params = { like: { likeable_id: post.id, likeable_type: post.class }, post_id: post.id, } %>
+        <%= button_to "#{counter} - Like" , likes_path(params), method: :post %>
+      <% else %>
+        <%= button_to  "#{counter} - Unlike", like_path(like), method: :delete %>
+      <% end %>
+    </td>
+    <td>
+      <%= button_to "#{post.comments.count} - Comments", post_path(post), method: :get %>
     </td>
   </tr>
 </table>

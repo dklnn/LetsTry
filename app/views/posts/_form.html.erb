@@ -1,15 +1,14 @@
 <%= form_with model: post do |f| %>
     <div>
         <%= f.label :title %><br/>
-        <%= f.text_field :title %>
-    </div>
+        <%= f.text_area :title %>
+    </div><br/>
     <div>
         <%= f.label :body %><br/>
-        <%= f.text_field :body %>
-    </div>
+        <%= f.text_area :body %>
+    </div><br/>
     <div>
-        <%= f.label :image %><br/>
         <%= f.file_field :image %>
-    </div>  
+    </div><br/>
     <%= f.submit %>
 <% end %>

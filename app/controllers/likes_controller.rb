@@ -1,8 +1,4 @@
 class LikesController < ApplicationController
-  # def new
-  #   @like = current_user.likes.new
-  # end
-
   def create
     @like = current_user.likes.new(like_params)
 
@@ -13,7 +9,6 @@ class LikesController < ApplicationController
 
   def destroy
     @like = current_user.likes.find(params[:id])
-    # likeable = @like.likeable
     @like.destroy
 
     redirect_back fallback_location: root_path

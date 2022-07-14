@@ -10,7 +10,7 @@ RSpec.describe PostsController, type: :controller do
     let(:posts) { create_list(:post, 3) }
 
     it 'renders the index template' do
-      is_expected.to render_template :show
+      is_expected.to render_template :index 
     end
 
     it 'assign @posts' do

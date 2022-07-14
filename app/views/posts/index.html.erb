@@ -1,8 +1,10 @@
 <h1>All the posts:</h1>
-<%= button_to 'Create new post', new_post_path, method: :get %>
+<div><br/>
 <%= paginate @posts %>
+</div>
 <% @posts.each do |post| %>
   <div>
     <%= render 'post', post: post %>
   </div>
+  <hr>
 <% end %>

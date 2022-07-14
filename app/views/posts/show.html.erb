@@ -2,7 +2,6 @@
 <div>
   <%= render 'post', post: @post %>
 </div>
-<%= link_to 'All post\'s', posts_path %>
 <br/>
 <br/>
 <h3>Comments for current post:</h3>
@@ -16,12 +15,12 @@
       </tr>
       <tr>
         <td>
-          <%= comment.likes.count %> Likes 
           <% like = current_user.likes.find_by(likeable: comment) %>
           <% if like.nil? %>
-            <%= button_to 'Like', likes_path, params: { like: { likeable_id: comment.id, likeable_type: Comment }, post_id: @post.id }, method: :post %>
+            <% params = { like: { likeable_id: comment.id, likeable_type: comment.class }, post_id: @post.id, } %>
+            <%= button_to "#{comment.likes.count} - Like", likes_path(params) %>
           <% else %>
-            <%= button_to 'Unlike', like_path(like), method: :delete %>
+            <%= button_to "#{comment.likes.count} - Unlike", like_path(like), method: :delete %>
           <% end %>
         </td>
         <% if comment.user_id == current_user.id %>
@@ -30,7 +29,7 @@
             <%= button_to 'Edit', edit_post_comment_path(params), method: :get %>
           </td>
           <td>
-            <%= button_to 'Destroy', destroy_post_comment_path(params), method: :delete %>
+            <%= button_to 'Destroy', post_comment_path(params), method: :delete %>
           </td>
         <% end %>
       </tr>

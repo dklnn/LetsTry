@@ -1,8 +1,4 @@
 <% @user = User.find(params[:id]) %>
-<% if @user.id == current_user.id %>
-  <%= render 'profile_settings' %>
-<% end %>
-<%= button_to 'All post\'s', posts_path, method: :get %>
 <h1>
   <td>
     <%= image_tag @user.avatar_thumbnail %>
@@ -13,8 +9,12 @@
 </h1>
 <h4>
   <table>
-    <%= link_to 'Follows', user_follows_path(@user), method: :get %></br>
-    <%= link_to 'Followers', user_followers_path(@user), method: :get %>
+  <td>
+    <%= button_to 'Follows', user_follows_path(@user), method: :get %>
+    </td>
+    <td>
+    <%= button_to 'Followers', user_followers_path(@user), method: :get %>
+    </td>
   </table>
 </h4>
 <% @posts = Post.all.where(user_id: @user.id).order(id: :desc) %>
