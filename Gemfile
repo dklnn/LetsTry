@@ -55,7 +55,7 @@ gem 'sassc-rails'
 
 gem 'mini_magick'
 
-gem 'ffaker', require: false
+gem 'ffaker'
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem 'image_processing', '~> 1.2'
